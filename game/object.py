@@ -6,18 +6,40 @@ tag - 해당 객체의 태그. 같은 재질의 객체를 구분하기 위한 �
 life - 해당 객체의 현재 생명 수
 form - 객체 모습 (현재는 일단 문자열로 처리)
 """
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QLabel, QSizePolicy
 
-class Object:
 
-    def __init__(self): # 생성자
-        return self.__init__(0, 0, 0, 0, 'Object', 0, "T")
+class Object (QLabel):
 
-    def __init__(self, x, y, width, height, tag, life, form):   # 생성자
-        self.x, self.y = x, y
-        self.width, self.height = width, height
-        self.tag = tag
-        self.life = life
-        self.form = form
+    def __init__(self, parent): # 생성자
+        return self.__init__(parent, 0, 0, 0, 0, 'Object', 0, "T")
+
+    def __init__(self, parent, x, y, width, height, tag, life, form, background):   # 생성자
+        super().__init__(tag, parent)
+
+        self.x = x
+        self.y = y
+
+        self.width = width
+        self.height = height
+
+        self.setText(form)
+        self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+        super().move(x, y)
+        super().setFixedSize(width, height)
+        super().setStyleSheet(background)
+        super().setAlignment(Qt.AlignCenter)
+
+    @property
+    def tag(self):
+        return self._tag
+
+    @property
+    def form(self):
+        return self._form
 
     def move(self, x_plus, y_plus): # 현재 위치에 x_plus, y_plus만큼 더한 위치로 설정
-        pass
+        self.x += x_plus
+        self.y += y_plus
+        super().move(self.x, self.y)

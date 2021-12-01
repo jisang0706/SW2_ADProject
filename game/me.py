@@ -4,9 +4,9 @@
 QLabel 사용
 """
 from PyQt5.QtWidgets import QLabel
-from game.object import Object
+from object import Object
 
-class Me (Object, QLabel):
+class Me (Object):
 
-    def __init__(self): # 생성자
-        pass
+    def __init__(self, parent): # 생성자
+        super().__init__(parent, 250, 450, 15, 30, 'friend', 3, 'ㅗ\nㅁ', "background-color:yellow")
