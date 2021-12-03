@@ -27,6 +27,7 @@ class Main (QWidget):
     def __init__(self, parent=None):    # 생성자
         super().__init__()
         self.isAlive = True
+        self.application = QApplication
 
         self.setFixedSize(500, 500)
         self.setStyleSheet("background-color: black;")

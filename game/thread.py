@@ -3,7 +3,6 @@ import time
 
 from PyQt5.QtCore import QThread
 from PyQt5.QtWidgets import QApplication
-
 import sound
 from thing import Thing
 
