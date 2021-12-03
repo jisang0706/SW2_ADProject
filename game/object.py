@@ -26,6 +26,7 @@ class Object (QLabel):
 
         self.setText(form)
         self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+        self.isAlive = True
         super().move(x, y)
         super().setFixedSize(width, height)
         super().setStyleSheet(background)
@@ -43,3 +44,18 @@ class Object (QLabel):
         self.x += x_plus
         self.y += y_plus
         super().move(self.x, self.y)
+
+    def go(self, x, y): # 해당 위치로 이동
+        self.x = x
+        self.y = y
+        super().move(self.x, self.y)
+
+    def overlap(self, obj): # 두 오브젝트가 겹치는지 검사
+        x_end = self.x + self.width
+        y_end = self.y + self.height
+        obj_x_end = obj.x + obj.width
+        obj_y_end = obj.y + obj.height
+        if ((self.x <= obj.x and obj.x <= x_end) or (self.x <= obj_x_end and obj_x_end <= x_end)) and \
+            ((self.y <= obj.y and obj.y <= y_end) or (self.y <= obj_y_end and obj_y_end <= y_end)):
+            return True
+        return False

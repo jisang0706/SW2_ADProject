@@ -9,4 +9,4 @@ from object import Object
 class Me (Object):
 
     def __init__(self, parent): # 생성자
-        super().__init__(parent, 250, 450, 15, 30, 'friend', 3, 'ㅗ\nㅁ', "background-color:yellow")
+        super().__init__(parent, 250, 450, 15, 30, 'friend', 3, 'O', "background-color:yellow")
