@@ -1,6 +1,8 @@
 import time
 
 from PyQt5.QtCore import QThread
+from PyQt5.QtWidgets import QApplication
+
 
 class MoveThread(QThread): # 총알 이동 스레드
     def __init__(self, parent=None):
@@ -29,7 +31,7 @@ class MoveThread(QThread): # 총알 이동 스레드
                     self.par.enem.isAlive = False
 
             self.redraw()
-            self.par.QApplication.processEvents()
+            self.par.application.processEvents()
             time.sleep(0.01)
 
     def redraw(self):
