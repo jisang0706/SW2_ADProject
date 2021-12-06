@@ -21,7 +21,13 @@ class MoveThread(): # 오브젝트 이동
 
     def moveEnemyBullets(self): # 적군 총알 이동
         for i in range(len(self.par.bullets)):
-            self.par.bullets[i].move(0, 3)
+            if self.par.bullets[i].follow:
+                move_x = self.par.me.x - self.par.bullets[i].x
+                if move_x != 0:
+                    move_x //= abs(move_x)
+                self.par.bullets[i].move(move_x, 3)
+            else:
+                self.par.bullets[i].move(0, 3)
             if self.par.me.overlap(self.par.bullets[i]):
                 sound.meDie()
                 self.par.gameOver()
@@ -52,6 +58,8 @@ class MoveThread(): # 오브젝트 이동
                     self.par.enems[j].shot = now + 3
                 self.par.bullets.append(
                     Thing(self.par, self.par.enems[j].x, self.par.enems[j].y, 'bullet'))
+                if random.randint(0, 3) == 1:
+                    self.par.bullets[-1].follow = True
                 self.par.bullets[-1].show()
 
     def deleteTrash(self): # 삭제된 총알, 적군 배열에서 제거

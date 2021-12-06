@@ -21,3 +21,4 @@ class Thing (Object):
         elif kind == 'bullet':
             super().__init__(parent, x, y, 5, 5, 'bullet', 1, 'i', "background-color:cyan")
             self.score = 0
+            self.follow = False

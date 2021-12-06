@@ -17,6 +17,7 @@ from multiprocessing import Process
 from PyQt5.QtCore import Qt, QThread
 from PyQt5.QtWidgets import QWidget, QLayout, QApplication, QVBoxLayout, QLCDNumber, QLabel, QGridLayout, QMessageBox
 
+from saverank import SaveRank
 from thread import MoveThread
 from thing import Thing
 from me import Me
@@ -24,10 +25,11 @@ import sound
 
 class Main (QWidget):
 
-    def __init__(self, parent=None):    # 생성자
+    def __init__(self, parent):    # 생성자
         super().__init__()
         self.isAlive = True
         self.application = QApplication
+        self.par = parent
 
         self.setFixedSize(500, 500)
         self.setStyleSheet("background-color: black;")
@@ -95,6 +97,7 @@ class Main (QWidget):
 
     def gameOver(self):
         QMessageBox.information(self, 'Game Over', f'{self.scoreLabel.text()}점 달성!', QMessageBox.Ok)
+        self.par.saveRank("Unknown", self.scoreLabel.text())
         self.close()
 
 if __name__ == '__main__':
